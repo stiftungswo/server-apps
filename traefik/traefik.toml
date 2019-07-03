@@ -1,0 +1,15 @@
+defaultEntryPoints = ["http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.dashboard]
+  address = ":8080"
+    [entryPoints.dashboard.auth.basic]
+    users = ["admin:$apr1$RdBU0C/4$ZHdplkQmjerrERhGR443r0"]
+
+[api]
+  entryPoint = "dashboard"
+  dashboard = true
+
+[docker]
