@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-symlink_path =  File.expand_path __FILE__
+require 'pathname'
+require 'tmpdir'
+require_relative '../helpers/command'
+require_relative '../helpers/rake_helper'
+
+SERVER_APPS_PATH = '/var/www/vhosts/stiftungswo.ch/apps'
+SYMLINK_PATH = File.expand_path __FILE__
+
+project, environment = Pathname(SYMLINK_PATH).each_filename.to_a[-4..-3]
+environment = environment.split('.')[0]
+
+p project, environment
+
+ARGF.each do |line|
+  _, newrev, refname = line.split(' ')
+  next unless refname == 'refs/heads/master'
+
+  Dir.mktmpdir("#{project}_#{environment}") do |tmp_dir|
+    git_archive_command = Helpers::Command.new(%W[git archive #{newrev}])
+    tar_command = Helpers::Command.new(%W[tar -x -C #{tmp_dir}])
+
+    git_archive_command.pipe(tar_command).execute
+
+    Dir.chdir(SERVER_APPS_PATH) do
+      Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:deploy", tmp_dir)
+    end
+  end
+end

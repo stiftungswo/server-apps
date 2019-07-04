@@ -1,4 +1,8 @@
-Dir['sites/**/*.rake'].each { |file| import file }
+require_relative 'helpers/tasks_loader'
+
+include Helpers::TasksLoader
+
+load_commands
 
 task :default do
   puts 'Hello'
