@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Helpers
+module DSL
   class Command
     attr_reader :shell_command
     attr_writer :pipe

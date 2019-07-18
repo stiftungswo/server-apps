@@ -3,8 +3,8 @@
 
 require 'pathname'
 require 'tmpdir'
-require_relative '../helpers/command'
-require_relative '../helpers/rake_helper'
+require_relative '../dsl/command'
+require_relative '../dsl/helpers/rake_helper'
 
 SERVER_APPS_PATH = '/var/www/vhosts/stiftungswo.ch/apps'
 SYMLINK_PATH = File.expand_path __FILE__

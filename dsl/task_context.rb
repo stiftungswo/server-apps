@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'docker_builder'
-require_relative 'docker_runner'
-require_relative 'environment_loader'
-require_relative 'command'
+require_relative 'helpers/docker_builder'
+require_relative 'helpers/docker_runner'
+require_relative 'helpers/environment_loader'
 
-module Helpers
+module DSL
   class TaskContext
     include Helpers::DockerBuilder
     include Helpers::DockerRunner
