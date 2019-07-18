@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+run_docker_image(
+  image_name: 'swo/better_izivi_frontend_develop',
+  container_name: 'better_izivi_develop_frontend',
+  network: 'traefik',
+  labels: %w[traefik.backend=better-izivi-develop traefik.frontend.rule=Host:izivi-develop.stiftungswo.ch]
+)
+
+run_docker_image(
+  image_name: 'swo/better_izivi_develop_api',
+  container_name: 'better_izivi_develop_api',
+  network: 'traefik',
+  env_file: "#{site_directory}/.env",
+  detached: false,
+  labels: %w[traefik.backend=better-izivi-api-develop traefik.frontend.rule=Host:izivi-api-develop.stiftungswo.ch]
+)

@@ -11,3 +11,15 @@ Style/NonNilCheck:
 
 Metrics/MethodLength:
   Max: 12
+
+AllCops:
+  Include:
+    - '**/Deployfile'
+    - '**/Runfile'
+    - '**/*.rb'
+    - '**/*.gemfile'
+    - '**/*.gemspec'
+    - '**/*.rake'
+    - '**/*.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'

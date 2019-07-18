@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
-require_relative 'deployment/docker'
+require_relative 'docker_builder'
+require_relative 'docker_runner'
 require_relative 'shell'
 require_relative 'command'
 
 module Helpers
   class TaskContext
     include Helpers::Shell
-    include Helpers::Deployment::Docker
+    include Helpers::DockerBuilder
+    include Helpers::DockerRunner
 
     attr_reader :args, :site_directory
 

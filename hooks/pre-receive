@@ -26,6 +26,7 @@ ARGF.each do |line|
 
     Dir.chdir(SERVER_APPS_PATH) do
       Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:deploy", tmp_dir)
+      Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:run")
     end
   end
 end

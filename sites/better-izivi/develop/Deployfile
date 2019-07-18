@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dotenv'
 
 Dotenv.load("#{site_directory}/.env")
@@ -10,10 +12,10 @@ FRONTEND_ENVIRONMENTS = %W[
 
 in_directory(args[:project_path]) do
   in_directory('frontend') do
-    build_swo_image('better_izivi_frontend_develop', FRONTEND_ENVIRONMENTS)
+    build_swo_image('better_izivi_develop_frontend', FRONTEND_ENVIRONMENTS)
   end
 
   in_directory('api') do
-    build_swo_image('better_izivi_api_develop', nil, network: 'traefik')
+    build_swo_image('better_izivi_develop_api', nil, network: 'traefik')
   end
 end
