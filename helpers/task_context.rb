@@ -2,14 +2,14 @@
 
 require_relative 'docker_builder'
 require_relative 'docker_runner'
-require_relative 'shell'
+require_relative 'environment_loader'
 require_relative 'command'
 
 module Helpers
   class TaskContext
-    include Helpers::Shell
     include Helpers::DockerBuilder
     include Helpers::DockerRunner
+    include Helpers::EnvironmentLoader
 
     attr_reader :args, :site_directory
 

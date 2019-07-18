@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-require 'dotenv'
-
-Dotenv.load("#{site_directory}/.env")
-
+ENV_FILE = "#{site_directory}/.env"
 FRONTEND_ENVIRONMENTS = %W[
   ENVIRONMENT=production
   API_URL=#{ENV['API_URL']}
   SENTRY_DSN=#{ENV['SENTRY_DSN']}
 ].freeze
+
+load_environment_file ENV_FILE
 
 in_directory(args[:project_path]) do
   in_directory('frontend') do
