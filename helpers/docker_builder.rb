@@ -14,13 +14,12 @@ module Helpers
 
     DOCKER_BUILD_BASE_COMMAND = %w[docker build].freeze
 
-    def build_swo_image(image_name, build_args = nil, additional_arguments = {})
-      build_docker_image({
+    def build_swo_image(options)
+      build_docker_image(options.merge(
         base_path: Dir.pwd,
-        image_name: "swo/#{image_name}",
-        build_args: build_args,
+        image_name: "swo/#{options[:image_name]}",
         dockerfile_path: 'prod.Dockerfile'
-      }.merge(additional_arguments))
+      ))
     end
 
     private

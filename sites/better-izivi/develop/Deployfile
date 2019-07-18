@@ -10,10 +10,16 @@ FRONTEND_ENVIRONMENTS = %W[
 
 in_directory(args[:project_path]) do
   in_directory('frontend') do
-    build_swo_image('better_izivi_develop_frontend', FRONTEND_ENVIRONMENTS)
+    build_swo_image(
+      image_name: 'better_izivi_develop_frontend',
+      build_args: FRONTEND_ENVIRONMENTS
+    )
   end
 
   in_directory('api') do
-    build_swo_image('better_izivi_develop_api', nil, network: 'traefik')
+    build_swo_image(
+      image_name: 'better_izivi_develop_api',
+      network: 'traefik'
+    )
   end
 end
