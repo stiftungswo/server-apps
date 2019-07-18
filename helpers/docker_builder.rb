@@ -29,6 +29,7 @@ module Helpers
       options = DEFAULT_DOCKER_PARAMS.merge options
 
       command = DOCKER_BUILD_BASE_COMMAND
+                .dup
                 .push(*generate_build_parameters_list(options))
                 .push(*generate_build_argument_list(options[:build_args]))
                 .push(options[:base_path])
