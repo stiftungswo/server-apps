@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :files do
   namespace :master do
     desc 'Runs files master'

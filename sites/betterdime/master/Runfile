@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :betterdime do
   namespace :master do
     desc 'Runs betterdime master'

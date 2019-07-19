@@ -19,14 +19,14 @@ ARGF.each do |line|
   next unless refname == 'refs/heads/master'
 
   Dir.mktmpdir("#{project}_#{environment}") do |tmp_dir|
-    git_archive_command = Helpers::Command.new(%W[git archive #{newrev}])
-    tar_command = Helpers::Command.new(%W[tar -x -C #{tmp_dir}])
+    git_archive_command = DSL::Command.new(%W[git archive #{newrev}])
+    tar_command = DSL::Command.new(%W[tar -x -C #{tmp_dir}])
 
     git_archive_command.pipe(tar_command).execute
 
     Dir.chdir(SERVER_APPS_PATH) do
-      Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:deploy", tmp_dir)
-      Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:run")
+      DSL::Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:deploy", tmp_dir)
+      DSL::Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:run")
     end
   end
 end

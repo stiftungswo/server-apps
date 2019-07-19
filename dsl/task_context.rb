@@ -3,12 +3,14 @@
 require_relative 'helpers/docker_builder'
 require_relative 'helpers/docker_runner'
 require_relative 'helpers/environment_loader'
+require_relative 'helpers/docker_namer'
 
 module DSL
   class TaskContext
     include Helpers::DockerBuilder
     include Helpers::DockerRunner
     include Helpers::EnvironmentLoader
+    include Helpers::DockerNamer
 
     attr_reader :args, :site_directory
 
@@ -24,6 +26,10 @@ module DSL
 
     def in_directory(path, &block)
       Dir.chdir(path, &block) if block_given?
+    end
+
+    def project_path
+      args[:project_path]
     end
   end
 end

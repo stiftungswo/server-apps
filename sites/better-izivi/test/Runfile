@@ -1,3 +1,20 @@
 # frozen_string_literal: true
 
-puts 'I am a Runfile'
+load_environment_file
+
+start_swo_docker_image(
+  docker_name_supplement: 'frontend',
+  labels: %W[
+    traefik.backend=better-izivi-test-frontend
+    traefik.frontend.rule=Host:#{ENV['FRONTEND_HOST']}
+  ]
+)
+
+start_swo_docker_image(
+  docker_name_supplement: 'api',
+  env_file: default_env_file,
+  labels: %W[
+    traefik.backend=better-izivi-test-api
+    traefik.frontend.rule=Host:#{ENV['API_HOST']}
+  ]
+)

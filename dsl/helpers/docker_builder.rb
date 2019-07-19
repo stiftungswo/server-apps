@@ -6,13 +6,19 @@ module DSL
   module Helpers
     module DockerBuilder
       def build_swo_image(options)
-        flags = options.merge(
+        docker_name_supplement = options.delete :docker_name_supplement
+
+        Docker.new('build', merge_swo_options(options, docker_name_supplement), options[:base_path], '.').execute
+      end
+
+      private
+
+      def merge_swo_options(options, docker_name_supplement)
+        options.merge(
           base_path: Dir.pwd,
-          tag: "swo/#{options[:image_name]}",
-          dockerfile_path: 'prod.Dockerfile',
-          no_cache: true
+          tag: swo_image_name(docker_name_supplement),
+          dockerfile_path: 'prod.Dockerfile'
         )
-        Docker.new('build', flags, options[:base_path], '.').execute
       end
     end
   end

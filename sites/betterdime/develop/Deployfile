@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :betterdime do
   namespace :develop do
     desc 'Deploy betterdime develop'

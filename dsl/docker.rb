@@ -32,7 +32,7 @@ module DSL
     end
 
     def execute_with_exit_code
-      return false unless ENV['PRETEND_COMMAND_EXECUTION'].nil?
+      return false if ENV['PRETEND_COMMAND_EXECUTION']
 
       system(*build_command)
     end
@@ -56,10 +56,10 @@ module DSL
     end
 
     def map_params(key, value)
-      if DOCKER_PARAMS_MAPPING.key?(key)
-        flag = DOCKER_PARAMS_MAPPING[key]
-        value.is_a?(Array) ? build_params_array(flag, value) : [flag, value]
-      end
+      return unless DOCKER_PARAMS_MAPPING.key?(key)
+
+      flag = DOCKER_PARAMS_MAPPING[key]
+      value.is_a?(Array) ? build_params_array(flag, value) : [flag, value]
     end
 
     def build_params_array(flag, values)

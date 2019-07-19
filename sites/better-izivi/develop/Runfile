@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
+load_environment_file
+
 start_swo_docker_image(
-  image_name: 'better_izivi_frontend_develop',
-  labels: %w[
-    traefik.backend=better-izivi-develop
-    traefik.frontend.rule=Host:izivi-develop.stiftungswo.ch
+  docker_name_supplement: 'frontend',
+  labels: %W[
+    traefik.backend=better-izivi-develop-frontend
+    traefik.frontend.rule=Host:#{ENV['FRONTEND_HOST']}
   ]
 )
 
 start_swo_docker_image(
-  image_name: 'better_izivi_api_develop',
-  env_file: "#{site_directory}/.env",
-  labels: %w[
-    traefik.backend=better-izivi-api-develop
-    traefik.frontend.rule=Host:izivi-api-develop.stiftungswo.ch
+  docker_name_supplement: 'api',
+  env_file: default_env_file,
+  labels: %W[
+    traefik.backend=better-izivi-develop-api
+    traefik.frontend.rule=Host:#{ENV['API_HOST']}
   ]
 )

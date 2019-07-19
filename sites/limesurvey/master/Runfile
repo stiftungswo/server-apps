@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :limesurvey do
   namespace :master do
     desc 'Runs limesurvey master'
