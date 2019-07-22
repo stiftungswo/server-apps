@@ -17,7 +17,7 @@ module DSL
     def initialize(args, file, site_directory)
       @args = args
       @file = file
-      @site_directory = site_directory
+      @site_directory = File.expand_path site_directory
     end
 
     def call

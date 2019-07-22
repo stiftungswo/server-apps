@@ -26,7 +26,7 @@ module DSL
 
       def migrate_swo_rails_db(docker_name_supplement = '')
         flags = { remove: true, env_file: default_env_file }
-        Docker.new('run', flags, swo_image_name(docker_name_supplement), 'bin/rails db:migrate').execute
+        Docker.new('run', flags, swo_image_name(docker_name_supplement), 'bin/rails', 'db:migrate').execute
       end
 
       private
