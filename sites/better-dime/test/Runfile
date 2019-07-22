@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-namespace :betterdime do
-  namespace :master do
-    desc 'Runs betterdime master'
+namespace :'better-dime' do
+  namespace :test do
+    desc 'Runs betterdime test'
     task :run do
       puts 'I am running'
     end

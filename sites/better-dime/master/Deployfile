@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-namespace :betterdime do
-  namespace :test do
-    desc 'Deploy betterdime test'
+namespace :'better-dime' do
+  namespace :master do
+    desc 'Deploy betterdime master'
     task :deploy do
       puts 'I am deploying'
     end
