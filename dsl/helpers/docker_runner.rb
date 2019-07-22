@@ -29,6 +29,12 @@ module DSL
         Docker.new('run', flags, swo_image_name(docker_name_supplement), 'bin/rails', 'db:migrate').execute
       end
 
+      def migrate_swo_laravel_db(docker_name_supplement = '')
+        flags = { remove: true, env_file: default_env_file }
+        arguments = [swo_image_name(docker_name_supplement), 'php', 'artisan', 'migrate', '--no-interaction', '--force']
+        Docker.new('run', flags, *arguments).execute
+      end
+
       private
 
       def stop_container(image_name)
