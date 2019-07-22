@@ -32,7 +32,7 @@ module DSL
     end
 
     def execute_with_exit_code
-      return false if ENV['PRETEND_COMMAND_EXECUTION']
+      return false if ENV.member? 'PRETEND_COMMAND_EXECUTION'
 
       system(*build_command)
     end
