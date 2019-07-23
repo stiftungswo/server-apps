@@ -8,7 +8,7 @@ This repository contains all our scripts and configuration files necessary for c
 - Dime
 - LimeSurvey
 - NextCloud
-- traefik monitor
+- Traefik monitor
 
 ## Structure
 
@@ -19,7 +19,9 @@ This repository contains all our scripts and configuration files necessary for c
 | `hooks/` | Git hooks inserted into each project to connect to custom deployment code |
 | `traefik/` | Configuration files required to have reverse proxy working |
 
-## 
+## Workflow
+
+The CD pushes to the corresponding git repo on the server. The repo has linked the pre-receive hook with the hook stored in this repo. The hook then infers the project and environment depending on the repo to which was pushed to and then calls the `deploy` and `run` rake task. 
 
 ## DSL
 
