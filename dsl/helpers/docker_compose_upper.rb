@@ -9,7 +9,7 @@ module DSL
         detached: true
       }.freeze
 
-      def start_up_docker_compose_file(options = {})
+      def startup_docker_compose_file(options = {})
         flags = DEFAULT_RUN_FLAGS.merge(
           project_name: "#{project_name}_#{project_environment}"
         ).merge(options)
