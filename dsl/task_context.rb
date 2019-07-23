@@ -27,9 +27,7 @@ module DSL
     end
 
     def call
-      instance_eval File.open(@file, 'r:UTF-8', &:read) unless @file.is_a? Array
-
-      @file.each{ |file| instance_eval File.open(file, 'r:UTF-8', &:read) }
+      instance_eval File.open(@file, 'r:UTF-8', &:read)
     end
 
     def in_directory(path, &block)

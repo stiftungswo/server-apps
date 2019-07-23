@@ -15,20 +15,19 @@ module DSL
 
       private
 
-      def load_restart_task()
-        restartable_sites = Dir['sites/**/*'].select do |site|
-          runfile_path = "#{site}/Runfile"
-          stopfile_path = "#{site}/Stopfile"
+      def load_restart_task
+        files = %w[Runfile Stopfile]
 
-          FileTest.exist?(runfile_path) && FileTest.exist?(stopfile_path)
-        end
-
+        restartable_sites = Dir['sites/**/*'].select { |site| files.all? { |file| FileTest.exist? "#{site}/#{file}" } }
         restartable_sites.each do |site|
-          runfile_path = "#{site}/Runfile"
-          stopfile_path = "#{site}/Stopfile"
-          files = [stopfile_path, runfile_path]
+          file = "#{site}/#{files[0]}"
+          project = extract_task_namespaces(file).first
+          environment = extract_task_namespaces(file).last
 
-          load_task(files, :restart)
+          namespace_task(project, environment) do
+            desc "Restart #{project} '#{environment}'"
+            task restart: %w[stop run]
+          end
         end
       end
 
@@ -45,25 +44,26 @@ module DSL
       end
 
       def load_task(file, task_name, parameters = [])
-        info_file = file.is_a?(Array) ? file[0] : file
+        project = extract_task_namespaces(file).first
+        environment = extract_task_namespaces(file).last
 
-        project = extract_task_namespaces(info_file).first
-        environment = extract_task_namespaces(info_file).last
-        file_dirname = File.dirname(info_file)
+        namespace_task(project, environment) do
+          desc "#{task_name.to_s.capitalize} #{project} '#{environment}'"
+          task task_name, parameters do |_t, args|
+            TaskContext.new(args, file, File.dirname(file)).call
+          end
+        end
+      end
 
+      def namespace_task(project, environment, &block)
         namespace project do
           namespace environment do
-            desc "#{task_name.to_s.capitalize} #{project} '#{environment}'"
-            task task_name, parameters do |_t, args|
-              TaskContext.new(args, file, file_dirname).call
-            end
+            block.call
           end
         end
       end
 
       def extract_task_namespaces(file)
-        file = file.first if file.is_a? Array
-
         Pathname(file).each_filename.to_a[-3..-2].map(&:to_sym)
       end
     end
