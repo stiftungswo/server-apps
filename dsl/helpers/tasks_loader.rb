@@ -57,9 +57,7 @@ module DSL
 
       def namespace_task(project, environment, &block)
         namespace project do
-          namespace environment do
-            block.call
-          end
+          namespace environment, &block
         end
       end
 
