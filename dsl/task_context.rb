@@ -4,6 +4,9 @@ require_relative 'helpers/docker_builder'
 require_relative 'helpers/docker_runner'
 require_relative 'helpers/environment_loader'
 require_relative 'helpers/docker_namer'
+require_relative 'helpers/docker_compose_upper'
+require_relative 'helpers/docker_compose_downer'
+require_relative 'helpers/project_infos'
 
 module DSL
   class TaskContext
@@ -11,6 +14,9 @@ module DSL
     include Helpers::DockerRunner
     include Helpers::EnvironmentLoader
     include Helpers::DockerNamer
+    include Helpers::DockerComposeUpper
+    include Helpers::DockerComposeDowner
+    include Helpers::ProjectInfos
 
     attr_reader :args, :site_directory
 

@@ -9,6 +9,7 @@ module DSL
       def load_commands
         Dir['sites/**/Deployfile'].each(&method(:load_deploy_task))
         Dir['sites/**/Runfile'].each(&method(:load_run_task))
+        Dir['sites/**/Stopfile'].each(&method(:load_stop_task))
       end
 
       private
@@ -19,6 +20,10 @@ module DSL
 
       def load_deploy_task(deploy_file)
         load_task(deploy_file, :deploy, [:project_path])
+      end
+
+      def load_stop_task(stop_file)
+        load_task(stop_file, :stop)
       end
 
       def load_task(file, task_name, parameters = [])

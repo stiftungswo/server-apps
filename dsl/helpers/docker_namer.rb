@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pathname'
-
 module DSL
   module Helpers
     module DockerNamer
@@ -19,19 +17,6 @@ module DSL
         return '' if supplement.nil?
 
         supplement.empty? ? '' : '_' + supplement
-      end
-
-      def project_name
-        project_name = project_path_fragments[-2]
-        project_name.gsub('-', '_')
-      end
-
-      def project_environment
-        project_path_fragments.last
-      end
-
-      def project_path_fragments
-        Pathname(site_directory).each_filename.to_a
       end
     end
   end

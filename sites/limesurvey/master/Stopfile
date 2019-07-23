@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 in_directory(site_directory) do
-  start_up_docker_compose_file
+  shutdown_docker_compose_file
 end
