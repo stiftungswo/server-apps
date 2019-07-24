@@ -6,7 +6,8 @@ module DSL
   module Helpers
     module DockerComposeUpper
       DEFAULT_RUN_FLAGS = {
-        detached: true
+        detached: true,
+        no_ansi: true
       }.freeze
 
       def startup_docker_compose_file(options = {})
@@ -14,7 +15,8 @@ module DSL
           project_name: "#{project_name}_#{project_environment}"
         ).merge(options)
 
-        DockerCompose.new('up', flags).execute
+        DockerCompose.new('up', flags)
+                     .explain('Starting up the docker compose file').execute
       end
     end
   end

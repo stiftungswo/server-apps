@@ -3,7 +3,7 @@
 require_relative 'command'
 
 module DSL
-  class Docker
+  class Docker < Command
     DOCKER_PARAMS_MAPPING = {
       dockerfile_path: '--file',
       tag: '--tag',
@@ -12,29 +12,23 @@ module DSL
       env_file: '--env-file',
       build_args: '--build-arg',
       labels: '--label',
-      format: '--format'
+      format: '--format',
+      restart: '--restart'
     }.freeze
 
     DOCKER_FLAGS_MAPPING = {
       remove: '--rm',
       detached: '-d',
-      no_cache: '--no-cache'
+      no_cache: '--no-cache',
+      quiet: '-'
     }.freeze
 
     def initialize(command, flags = {}, *arguments)
       @command = command
       @flags = flags
       @arguments = arguments
-    end
 
-    def execute(&block)
-      Command.new(build_command).execute(&block)
-    end
-
-    def execute_with_exit_code
-      return false if ENV.member? 'PRETEND_COMMAND_EXECUTION'
-
-      system(*build_command)
+      @shell_command = build_command
     end
 
     private

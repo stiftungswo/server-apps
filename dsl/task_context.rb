@@ -2,6 +2,8 @@
 
 require_relative 'helpers/docker_builder'
 require_relative 'helpers/docker_runner'
+require_relative 'helpers/docker_stopper'
+require_relative 'helpers/docker_remover'
 require_relative 'helpers/environment_loader'
 require_relative 'helpers/docker_namer'
 require_relative 'helpers/docker_compose_upper'
@@ -12,6 +14,8 @@ module DSL
   class TaskContext
     include Helpers::DockerBuilder
     include Helpers::DockerRunner
+    include Helpers::DockerStopper
+    include Helpers::DockerRemover
     include Helpers::EnvironmentLoader
     include Helpers::DockerNamer
     include Helpers::DockerComposeUpper

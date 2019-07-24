@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.0)
+    colorize (0.8.1)
     dotenv (2.7.4)
     jaro_winkler (1.5.3)
     parallel (1.17.0)
@@ -23,6 +24,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  colorize
   dotenv
   rake
   rubocop

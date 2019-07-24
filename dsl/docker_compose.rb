@@ -3,11 +3,15 @@
 require_relative 'command'
 
 module DSL
-  class DockerCompose
+  class DockerCompose < Command
     COMPOSE_PARAMS_MAPPING = {
       file_path: '--file',
       format: '--format',
       project_name: '--project-name'
+    }.freeze
+
+    COMPOSE_FLAGS_MAPPING = {
+      no_ansi: '--no-ansi'
     }.freeze
 
     COMMAND_FLAGS_MAPPING = {
@@ -19,25 +23,22 @@ module DSL
       @command = command
       @flags = flags
       @arguments = arguments
-    end
 
-    def execute(&block)
-      Command.new(build_command).execute(&block)
-    end
-
-    def execute_with_exit_code
-      return false if ENV.member? 'PRETEND_COMMAND_EXECUTION'
-
-      system(*build_command)
+      @shell_command = build_command
     end
 
     private
 
     def build_command
-      (['docker-compose'] + build_compose_params + [@command] + build_command_flags + @arguments).compact
+      (['docker-compose'] + build_compose_flags + build_compose_params +
+        [@command] + build_command_flags + @arguments).compact
     end
 
-    def active_flag_keys
+    def active_compose_flag_keys
+      @flags.select { |key, value| COMPOSE_FLAGS_MAPPING.key?(key) && value == true }.keys
+    end
+
+    def active_command_flag_keys
       @flags.select { |key, value| COMMAND_FLAGS_MAPPING.key?(key) && value == true }.keys
     end
 
@@ -45,8 +46,12 @@ module DSL
       @flags.flat_map { |key, value| map_params(key, value) }.compact
     end
 
+    def build_compose_flags
+      COMPOSE_FLAGS_MAPPING.values_at(*active_compose_flag_keys)
+    end
+
     def build_command_flags
-      COMMAND_FLAGS_MAPPING.values_at(*active_flag_keys)
+      COMMAND_FLAGS_MAPPING.values_at(*active_command_flag_keys)
     end
 
     def map_params(key, value)
