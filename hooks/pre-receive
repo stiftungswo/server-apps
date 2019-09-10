@@ -12,7 +12,7 @@ SYMLINK_PATH = File.expand_path __FILE__
 project, environment = Pathname(SYMLINK_PATH).each_filename.to_a[-4..-3]
 environment = environment.split('.')[0]
 
-p project, environment
+puts "Deploying to #{project} using environment #{environment}"
 
 ARGF.each do |line|
   _, newrev, refname = line.split(' ')
