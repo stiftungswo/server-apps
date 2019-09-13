@@ -4,7 +4,7 @@ load_environment_file
 
 FRONTEND_ENVIRONMENTS = %W[
   ENVIRONMENT=production
-  API_URL=https://#{ENV['API_HOST']}/api/v1/
+  API_URL=https://#{ENV['API_HOST']}/api/v1
   SENTRY_DSN=#{ENV['SENTRY_DSN']}
 ].freeze
 
