@@ -5,6 +5,7 @@ load_environment_file
 FRONTEND_ENVIRONMENTS = %W[
   ENVIRONMENT=production
   API_URL=https://#{ENV['API_HOST']}/api/v1
+  API_V2_URL=https://#{ENV['APIR_HOST']}/v2
   SENTRY_DSN=#{ENV['SENTRY_DSN']}
 ].freeze
 
@@ -22,6 +23,14 @@ in_directory(project_path) do
       network: 'traefik'
     )
   end
-
   migrate_swo_laravel_db 'api'
+
+  in_directory('apir') do
+    build_swo_image(
+      docker_name_supplement: 'apir',
+      network: 'traefik'
+    ) 
+  end
+  migrate_swo_rails_db 'apir'
+
 end
