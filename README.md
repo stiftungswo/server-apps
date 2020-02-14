@@ -23,6 +23,25 @@ This repository contains all our scripts and configuration files necessary for c
 
 The CD pushes to the corresponding git repo on the server. The repo has linked the pre-receive hook with the hook stored in this repo. The hook then infers the project and environment depending on the repo to which was pushed to and then calls the `deploy` and `run` rake task. 
 
+## Rake tasks
+
+### Auto-generated Tasks
+
+#### Deploy Task
+When there is a Deployfile in the project-environment folder, there is a rake project:environment:deploy task to execute that Deployfile.
+
+**This Task should only be run by the pre-receive hook** 
+
+#### Run Task
+When there is a Runfile in the project-environment folder, there is a rake project:environment:run task to execute that Runfile
+
+#### Stop Task
+When there is a Stopfile in the project-environment folder, there is a rake project:environment:stop task to execute that Stopfile
+
+#### Restart Task
+When there is a Runfile and Stopfile in the project-environment folder, there is a rake project:environment:restart task to execute that Stopfile and then that Runfile
+
+
 ## DSL
 
 #### Docker commands
