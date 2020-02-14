@@ -1,6 +1,8 @@
-require_relative 'helpers/tasks_loader'
+# frozen_string_literal: true
 
-include Helpers::TasksLoader
+require_relative 'dsl/helpers/tasks_loader'
+
+include DSL::Helpers::TasksLoader
 
 load_commands
 

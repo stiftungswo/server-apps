@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+load_environment_file
+
+FRONTEND_ENVIRONMENTS = %W[
+  ENVIRONMENT=production
+  API_URL=https://#{ENV['API_HOST']}/api/v1
+  SENTRY_DSN=#{ENV['SENTRY_DSN']}
+].freeze
+
+in_directory(project_path) do
+  in_directory('frontend') do
+    build_swo_image(
+      docker_name_supplement: 'frontend',
+      build_args: FRONTEND_ENVIRONMENTS
+    )
+  end
+
+  in_directory('api') do
+    build_swo_image(
+      docker_name_supplement: 'api',
+      network: 'traefik'
+    )
+  end
+
+  migrate_swo_laravel_db 'api'
+end

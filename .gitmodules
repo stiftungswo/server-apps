@@ -1,0 +1,3 @@
+[submodule "sites/limesurvey/master/plugins/ZestHook"]
+	path = sites/limesurvey/master/plugins/ZestHook
+	url = git@github.com:evently-nl/zesthook.git
