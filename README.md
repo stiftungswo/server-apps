@@ -2,6 +2,17 @@
 
 This repository contains all our scripts and configuration files necessary for custom deployment on our METANET server.
 
+### Deployment
+
+The server-apps repo is currently located on the server under the user `swo` in the folder `apps`. This repo needs to be pulled manually in case of changes. There is no CI/CD yet. This repo provides various hooks which get called when one might push a repo onto the server. See `git` folder under the user `swo`. To trigger a deploy without semaphore, use the following steps in case of dev/develop:
+
+```
+ssh-copy-id swo@stiftungswo.ch
+git remote add metanet swo@stiftungswo.ch:~/git/better-dime/develop.git
+git push -f metanet-develop dev:master
+# => build starts...
+```
+ 
 ### Current sites
 
 - iZivi
