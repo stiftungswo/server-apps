@@ -12,6 +12,8 @@ git remote add metanet-develop swo@stiftungswo.ch:~/git/better-dime/develop.git
 git push -f metanet-develop dev:master
 # => build starts...
 ```
+
+The container environment file is stored on the server in the ```app``` folder but not commited for security reasons.
  
 ### Current sites
 
