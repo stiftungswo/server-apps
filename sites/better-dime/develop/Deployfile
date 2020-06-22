@@ -17,14 +17,6 @@ in_directory(project_path) do
     )
   end
 
-  in_directory('api') do
-    build_swo_image(
-      docker_name_supplement: 'api',
-      network: 'traefik'
-    )
-  end
-  migrate_swo_laravel_db 'api'
-
   in_directory('apir') do
     build_swo_image(
       docker_name_supplement: 'apir',

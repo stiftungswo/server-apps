@@ -11,19 +11,10 @@ start_swo_docker_image(
 )
 
 start_swo_docker_image(
-  docker_name_supplement: 'api',
+  docker_name_supplement: 'apir',
   env_file: default_env_file,
   labels: %W[
-    traefik.backend=better-dime-test-api
-    traefik.frontend.rule=Host:#{ENV['API_HOST']}
+    traefik.backend=better-dime-test-apir
+    traefik.frontend.rule=Host:#{ENV['APIR_HOST']}
   ]
 )
-
-# start_swo_docker_image(
-#   docker_name_supplement: 'apir',
-#   env_file: default_env_file,
-#   labels: %W[
-#     traefik.backend=better-dime-test-apir
-#     traefik.frontend.rule=Host:#{ENV['APIR_HOST']}
-#   ]
-# )
