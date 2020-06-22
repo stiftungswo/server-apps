@@ -7,6 +7,7 @@ services:
     image: traefik:v1.7.12
     ports:
       - "8080:80"
+      - "4433:443"
       - "9999:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

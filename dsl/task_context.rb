@@ -31,6 +31,7 @@ module DSL
     end
 
     def call
+      STDERR.puts @file
       instance_eval File.open(@file, 'r:UTF-8', &:read)
     end
 

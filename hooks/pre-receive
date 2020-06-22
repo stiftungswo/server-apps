@@ -13,16 +13,20 @@ project, environment = Pathname(SYMLINK_PATH).each_filename.to_a[-4..-3]
 environment = environment.split('.')[0]
 
 puts "Deploying to #{project} using environment #{environment}"
+puts Dir.pwd
 
 ARGF.each do |line|
   _, newrev, refname = line.split(' ')
   next unless refname == 'refs/heads/master'
 
+  STDERR.puts refname
   Dir.mktmpdir("#{project}_#{environment}") do |tmp_dir|
     git_archive_command = DSL::Command.new(%W[git archive #{newrev}])
     tar_command = DSL::Command.new(%W[tar -x -C #{tmp_dir}])
 
     git_archive_command.pipe(tar_command).execute
+    	
+    STDERR.puts tmp_dir.inspect
 
     Dir.chdir(SERVER_APPS_PATH) do
       DSL::Helpers::RakeHelper.execute_rake_command("#{project}:#{environment}:deploy", tmp_dir)

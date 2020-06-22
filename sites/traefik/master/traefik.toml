@@ -1,8 +1,11 @@
-defaultEntryPoints = ["http"]
+logLevel = "DEBUG"
+defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+  [entryPoints.https]
+  address = ":443"
   [entryPoints.dashboard]
   address = ":8080"
     [entryPoints.dashboard.auth.basic]
