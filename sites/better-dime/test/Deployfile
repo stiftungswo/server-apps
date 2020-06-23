@@ -4,10 +4,9 @@ load_environment_file
 
 FRONTEND_ENVIRONMENTS = %W[
   ENVIRONMENT=production
-  API_URL=https://#{ENV['API_HOST']}/api/v1/
-  SENTRY_DSN=#{ENV['SENTRY_DSN']}
+  APIR_URL=https://#{ENV['APIR_HOST']}/v2
+  SENTRY_DSN_PUBLIC=#{ENV['SENTRY_DSN_PUBLIC']}
 ].freeze
-# APIR_URL=https://#{ENV['APIR_HOST']}/v2
 
 in_directory(project_path) do
   in_directory('frontend') do
