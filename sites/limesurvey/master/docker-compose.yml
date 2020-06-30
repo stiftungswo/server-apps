@@ -34,6 +34,5 @@ services:
     volumes:
       - lime:/var/www/html
       - ./plugins:/var/www/html/plugins
-      - ./.config:/var/www/html/application/config
 volumes:
   lime:
