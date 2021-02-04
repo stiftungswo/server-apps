@@ -1,4 +1,4 @@
-logLevel = "DEBUG"
+logLevel = "ERROR"
 defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
