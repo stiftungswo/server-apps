@@ -38,6 +38,8 @@ The CD pushes to the corresponding git repo on the server. The repo has linked t
 
 ## Rake tasks
 
+Access the metanet server as root or swo user vis ssh. Run `rake -T` in the `apps` folder to display all potential rake tasks. Then run whichever one needed: eg. `rake traefik:master:restart`.
+
 ### Auto-generated Tasks
 
 #### Deploy Task
