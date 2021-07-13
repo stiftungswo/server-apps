@@ -4,10 +4,9 @@ networks:
     external: true
 services:
   traefik:
-    image: traefik:v1.7.12
+    image: traefik:1.7-alpine
     ports:
       - "8080:80"
-      - "4433:443"
       - "9999:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

@@ -1,11 +1,9 @@
 logLevel = "ERROR"
-defaultEntryPoints = ["http", "https"]
+defaultEntryPoints = ["http"]
 
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-  [entryPoints.https]
-  address = ":443"
   [entryPoints.dashboard]
   address = ":8080"
     [entryPoints.dashboard.auth.basic]
@@ -14,5 +12,7 @@ defaultEntryPoints = ["http", "https"]
 [api]
   entryPoint = "dashboard"
   dashboard = true
+  [api.statistics]
+    recentErrors = 10
 
 [docker]

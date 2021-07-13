@@ -21,7 +21,8 @@ The container environment file is stored on the server in the ```app``` folder b
 - Dime
 - LimeSurvey
 - NextCloud
-- Traefik monitor
+- Traefik ReverseProxy
+- Rocket Chat
 
 ## Structure
 

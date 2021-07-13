@@ -1,9 +1,11 @@
 version: "3.3"
+
 networks:
   traefik:
     external: true
-  internal:
+  survey_internal:
     external: false
+
 services:
   frontend:
     image: nginx:alpine
@@ -16,18 +18,19 @@ services:
     depends_on:
       - limesurvey
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - lime:/var/www/html
     networks:
-      - internal
+      - survey_internal
       - traefik
     restart: unless-stopped
+
   limesurvey:
     image: martialblog/limesurvey:fpm-alpine
     labels:
       - "traefik.enable=false"
     networks:
-      - internal
+      - survey_internal
     restart: unless-stopped
     env_file:
       - .env
