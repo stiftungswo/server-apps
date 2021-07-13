@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+%w[frontend apir].each do |container_supplement|
+  stop_swo_docker_container container_supplement
+  remove_swo_docker_container container_supplement
+end
