@@ -17,6 +17,6 @@ start_swo_docker_image(
   labels: %W[
     traefik.docker.network=traefik
     traefik.enable=true
-    traefik.http.routers.better-izivi-test-frontend.rule=Host(`#{ENV['API_HOST']}`)
+    traefik.http.routers.better-izivi-test-api.rule=Host(`#{ENV['API_HOST']}`)
   ]
 )
