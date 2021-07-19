@@ -12,7 +12,7 @@ module DSL
     end
 
     def dangling?
-      status?('exited')
+      status?('exited') || status?('restarting')
     end
 
     def stop
