@@ -17,6 +17,7 @@ module DSL
     }.freeze
 
     DOCKER_FLAGS_MAPPING = {
+      force: '--force',
       remove: '--rm',
       detached: '-d',
       no_cache: '--no-cache',

@@ -21,7 +21,7 @@ module DSL
     end
 
     def remove
-      Docker.new('rm', {}, @container_name)
+      Docker.new('rm', { force: true }, @container_name)
             .explain('Removing docker container').execute
     end
 
