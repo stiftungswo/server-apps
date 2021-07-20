@@ -5,8 +5,9 @@ load_environment_file
 start_swo_docker_image(
   docker_name_supplement: 'frontend',
   labels: %W[
-    traefik.backend=better-izivi-master-frontend
-    traefik.frontend.rule=Host:#{ENV['FRONTEND_HOST']}
+    traefik.docker.network=traefik
+    traefik.enable=true
+    traefik.http.routers.better-izivi-master-frontend.rule=Host(`#{ENV['FRONTEND_HOST']}`)
   ]
 )
 
@@ -14,7 +15,8 @@ start_swo_docker_image(
   docker_name_supplement: 'api',
   env_file: default_env_file,
   labels: %W[
-    traefik.backend=better-izivi-master-api
-    traefik.frontend.rule=Host:#{ENV['API_HOST']}
+    traefik.docker.network=traefik
+    traefik.enable=true
+    traefik.http.routers.better-izivi-master-api.rule=Host(`#{ENV['API_HOST']}`)
   ]
 )

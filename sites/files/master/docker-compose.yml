@@ -10,16 +10,32 @@ services:
     image: nextcloud:20
     restart: always
     labels:
-      - traefik.backend=files-master
-      - traefik.frontend.rule=Host:files.stiftungswo.ch
-      - traefik.frontend.passHostHeader:"true"
-      - traefik.docker.network=traefik
+      - traefik.enable=true
+      - traefik.http.middlewares.files-dav-redirect.redirectregex.regex='https://(.*)/.well-known/(card|cal)dav'
+      - traefik.http.middlewares.files-dav-redirect.redirectregex.replacement='https://$${1}/remote.php/dav'
+      - traefik.http.middlewares.files-dav-redirect.redirectregex.permanent=true
+      - traefik.http.middlewares.files-hsts.headers.stsSeconds=15552000 # defined but not used in belowe middleware list
+      - traefik.http.routers.files-master.rule=Host(`files.stiftungswo.ch`)
+      - traefik.http.routers.files-master.middlewares=files-dav-redirect@docker
+      - traefik.http.services.files-master.loadbalancer.passhostheader=true
     volumes:
       - ./html:/var/www/html
     networks:
       - files_internal
       - traefik
 
+
+
+  cron:
+    image: nextcloud:20
+    restart: always
+    volumes:
+      - ./html:/var/www/html
+    entrypoint: /cron.sh
+    networks:
+      - files_internal
+    depends_on:
+      - redis
       
 networks:
   traefik:

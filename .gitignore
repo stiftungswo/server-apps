@@ -1,4 +1,5 @@
 .env
 .config
 acme.json
+.rake_tasks~
 vendor/
