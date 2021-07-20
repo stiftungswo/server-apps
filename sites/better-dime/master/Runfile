@@ -5,8 +5,8 @@ load_environment_file
 start_swo_docker_image(
   docker_name_supplement: 'frontend',
   labels: %W[
-    traefik.backend=better-dime-master-frontend
-    traefik.frontend.rule=Host:#{ENV['FRONTEND_HOST']}
+    traefik.enable=true 
+    traefik.http.routers.better-dime-master-frontend.rule=Host(`#{ENV['FRONTEND_HOST']}`)
   ]
 )
 
@@ -14,7 +14,7 @@ start_swo_docker_image(
   docker_name_supplement: 'apir',
   env_file: default_env_file,
   labels: %W[
-    traefik.backend=better-dime-master-apir
-    traefik.frontend.rule=Host:#{ENV['APIR_HOST']}
+    traefik.enable=true 
+    traefik.http.routers.better-dime-master-apir.rule=Host(`#{ENV['APIR_HOST']}`)
   ]
 )
