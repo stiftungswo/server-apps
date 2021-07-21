@@ -2,17 +2,27 @@ version: "3.7"
 networks:
  traefik:
     external: true
+
+
 services:
   traefik:
-    image: traefik:1.7-alpine
+    image: traefik:v2.4 
     ports:
-      - "8080:80"
-      - "9999:8080"
+      - "8081:80"
+      - "9998:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.toml:/traefik.toml
+      - ./acme.json:/acme.json
     networks:
       - traefik
     labels:
-      traefik.frontend.rule: "Host:traefik.stiftungswo.ch"
+      - traefik.docker.network=traefik
+      - traefik.port=80
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik-dashboard-master.rule=Host(`traefik.stiftungswo.ch`)"
+      - "traefik.http.routers.traefik-dashboard-master.service=api@internal"
+      - "traefik.http.routers.traefik-dashboard-master.middlewares=dashboard-auth@docker"
+      - "traefik.http.middlewares.dashboard-auth.basicauth.users=admin:$$apr1$$RdBU0C/4$$ZHdplkQmjerrERhGR443r0"
     restart: unless-stopped
+

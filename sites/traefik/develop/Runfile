@@ -1,5 +1,0 @@
-# frozen_string_literal: true
-
-in_directory(site_directory) do
-  startup_docker_compose_file
-end

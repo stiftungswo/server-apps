@@ -1,18 +1,23 @@
-logLevel = "ERROR"
-defaultEntryPoints = ["http"]
+[log]
+  level = "DEBUG"
 
 [entryPoints]
-  [entryPoints.http]
+  [entryPoints.web]
   address = ":80"
-  [entryPoints.dashboard]
-  address = ":8080"
-    [entryPoints.dashboard.auth.basic]
-    users = ["admin:$apr1$RdBU0C/4$ZHdplkQmjerrERhGR443r0"]
+  [entryPoints.websecure]
+  address = ":443"
 
 [api]
-  entryPoint = "dashboard"
+  insecure = true
   dashboard = true
-  [api.statistics]
-    recentErrors = 10
 
-[docker]
+[providers.docker]
+  network = "traefik"
+  exposedByDefault = false
+
+[acme]
+  email = "office@stiftungswo.ch"
+  storage = "acme.json"
+  entryPoint = "websecure"
+  onHostRule = true
+  [acme.tlsChallenge]
