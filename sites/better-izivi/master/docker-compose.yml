@@ -1,0 +1,15 @@
+version: "3.3"
+
+networks:
+  traefik:
+    external: true
+
+services:
+  redis:
+    hostname: redis-izivi-master
+    image: redis:6.2.5-alpine
+    labels:
+      - "traefik.enable=false"
+    networks:
+      - traefik
+    restart: unless-stopped

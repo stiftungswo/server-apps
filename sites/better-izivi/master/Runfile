@@ -20,3 +20,15 @@ start_swo_docker_image(
     traefik.http.routers.better-izivi-master-api.rule=Host(`#{ENV['API_HOST']}`)
   ]
 )
+
+start_swo_docker_image(
+  docker_name_supplement: 'api',
+  name_override: 'api_worker',
+  env_file: default_env_file,
+  labels: %w[traefik.enable=false],
+  command: %w[/api/bin/bundle exec sidekiq -C config/sidekiq.yml]
+)
+
+in_directory(site_directory) do
+  startup_docker_compose_file
+end

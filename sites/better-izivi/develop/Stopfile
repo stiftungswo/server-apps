@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-%w[frontend api].each do |container_supplement|
+%w[frontend api api_worker].each do |container_supplement|
   stop_swo_docker_container container_supplement
   remove_swo_docker_container container_supplement
+end
+
+in_directory(site_directory) do
+  shutdown_docker_compose_file
 end

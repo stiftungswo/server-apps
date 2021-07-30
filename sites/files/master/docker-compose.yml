@@ -7,7 +7,7 @@ services:
       - files_internal
 
   app:
-    image: nextcloud:20
+    image: nextcloud:21
     restart: always
     labels:
       - traefik.enable=true
@@ -27,7 +27,7 @@ services:
 
 
   cron:
-    image: nextcloud:20
+    image: nextcloud:21
     restart: always
     volumes:
       - ./html:/var/www/html
