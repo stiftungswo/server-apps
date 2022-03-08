@@ -25,4 +25,8 @@ services:
       - "traefik.http.routers.traefik-dashboard-master.middlewares=dashboard-auth@docker"
       - "traefik.http.middlewares.dashboard-auth.basicauth.users=admin:$$apr1$$RdBU0C/4$$ZHdplkQmjerrERhGR443r0"
     restart: unless-stopped
-
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"   # number of files or file count
+        max-size: "100m" # file size limit (to avoid 35GB log files)
