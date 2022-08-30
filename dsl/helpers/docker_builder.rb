@@ -5,7 +5,7 @@ require_relative '../docker'
 module DSL
   module Helpers
     module DockerBuilder
-      def build_swo_image(options)
+      def build_swo_image(options = {})
         docker_name_supplement = options.delete :docker_name_supplement
 
         Docker.new('build', merge_swo_options(options, docker_name_supplement), options[:base_path], '.').execute

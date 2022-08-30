@@ -4,6 +4,7 @@ start_swo_docker_image(
   labels: %W[
     traefik.docker.network=traefik
     traefik.enable=true
-    traefik.http.routers.rechnungen-master.rule=Host(`rechnungen-master.stiftungswo.ch`)
+    traefik.http.routers.rechnungen-master.rule=Host(`rechnungen.stiftungswo.ch`)
+    traefik.http.services.rechnungen-master.loadbalancer.server.port=80
   ]
 )

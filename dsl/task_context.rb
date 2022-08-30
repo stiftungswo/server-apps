@@ -32,7 +32,7 @@ module DSL
 
     def call
       STDERR.puts @file
-      instance_eval File.open(@file, 'r:UTF-8', &:read)
+      instance_eval File.open(@file, 'r:UTF-8', &:read), __FILE__, __LINE__ + 1
     end
 
     def in_directory(path, &block)
