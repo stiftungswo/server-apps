@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+start_swo_docker_image(
+  labels: %W[
+    traefik.docker.network=traefik
+    traefik.enable=true
+    traefik.http.routers.rechnungen-master.rule=Host(`rechnungen-master.stiftungswo.ch`)
+  ]
+)

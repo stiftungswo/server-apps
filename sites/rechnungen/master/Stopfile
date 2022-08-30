@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+stop_swo_docker_container
+remove_swo_docker_container

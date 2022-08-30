@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+in_directory(project_path) do
+  build_swo_image
+end
