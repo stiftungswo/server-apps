@@ -17,14 +17,14 @@ services:
       - limesurvey
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - lime:/var/www/html
+      - lime_updated:/var/www/html
     networks:
       - survey_internal
       - traefik
     restart: unless-stopped
 
   limesurvey:
-    image: martialblog/limesurvey:fpm-alpine
+    image: martialblog/limesurvey:5-fpm-alpine
     labels:
       - "traefik.enable=false"
     networks:
@@ -33,7 +33,7 @@ services:
     env_file:
       - .env
     volumes:
-      - lime:/var/www/html
-      - ./plugins:/var/www/html/plugins
+      - lime_updated:/var/www/html
+
 volumes:
-  lime:
+  lime_updated:
